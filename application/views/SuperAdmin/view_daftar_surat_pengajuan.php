@@ -23,7 +23,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <a href="<?php echo site_url('Pengaju/tambah_surat'); ?>">
+                                    <a href="<?php echo site_url('SuperAdmin/tambah_surat'); ?>">
                                         <button type="button" class="btn btn-danger mb-3">
                                             <i class="fa fa-plus"></i> Buat Surat Pengajuan
                                         </button>
@@ -37,39 +37,37 @@
                                             aria-describedby="dataTable_info">
                                             <thead class="bg-light text-capitalize">
                                                 <tr role="row">
-                                                    <th tabindex="0" aria-controls="dataTable" style="width: 5%;">No
+                                                    <th tabindex="0" aria-controls="dataTable" style="width: 10px;">No
                                                     </th>
                                                     <th tabindex="0" aria-controls="dataTable" style="width: 80px;"
                                                         aria-sort="none" rowspan="1" colspan="1"
                                                         aria-label="Judul Surat Pengajuan: activate to sort column ascending">
                                                         Nomor SP</th>
-                                                    <th tabindex="0" aria-controls="dataTable" style="width: 11%;"
-                                                        aria-sort="none"
-                                                        aria-label="Nama Pekerja: activate to sort column ascending">
-                                                        Judul
-                                                        Surat
-                                                        Pengajuan</th>
-                                                    <th tabindex="0" aria-controls="dataTable" style="width:11%;"
-                                                        aria-sort="none"
-                                                        aria-label="Departemen: activate to sort column ascending">
+                                                    <th tabindex="0" aria-controls="dataTable" style="width: 100px;"
+                                                        aria-sort="none" rowspan="1" colspan="1"
+                                                        aria-label="Judul Surat Pengajuan: activate to sort column ascending">
+                                                        Judul Surat Pengajuan</th>
+                                                    <th tabindex="0" aria-controls="dataTable" style="width: 90px;"
+                                                        aria-sort="none" rowspan="1" colspan="1"
+                                                        aria-label="Tujuan Pengajuan: activate to sort column ascending">
                                                         Tujuan Pengajuan</th>
-                                                    <th tabindex="0" aria-controls="dataTable" style="width: 11%;"
-                                                        aria-sort="none"
-                                                        aria-label="Golongan Upah: activate to sort column ascending">
+                                                    <th tabindex="0" aria-controls="dataTable" style="width: 50px;"
+                                                        aria-sort="none" rowspan="1" colspan="1"
+                                                        aria-label="Tanggal Pengajuan: activate to sort column ascending">
                                                         Tanggal Pengajuan</th>
-                                                    <th tabindex="0" aria-controls="dataTable" style="width:11%;"
-                                                        aria-sort="none"
-                                                        aria-label="Departemen: activate to sort column ascending">
+                                                    <th tabindex="0" aria-controls="dataTable" style="width:70px;"
+                                                        aria-sort="none" rowspan="1" colspan="1"
+                                                        aria-label="Kota Tujuan: activate to sort column ascending">
                                                         Kota Tujuan</th>
-                                                    <th tabindex="0" aria-controls="dataTable" style="width:11%;"
-                                                        aria-sort="none"
-                                                        aria-label="Departemen: activate to sort column ascending">
+                                                    <th tabindex="0" aria-controls="dataTable" style="width:50px;"
+                                                        aria-sort="none" rowspan="1" colspan="1"
+                                                        aria-label="Tanggal Mulai: activate to sort column ascending">
                                                         Tanggal Mulai</th>
-                                                    <th tabindex="0" aria-controls="dataTable" style="width:11%;"
-                                                        aria-sort="none"
-                                                        aria-label="Departemen: activate to sort column ascending">
+                                                    <th tabindex="0" aria-controls="dataTable" style="width:50px;"
+                                                        aria-sort="none" rowspan="1" colspan="1"
+                                                        aria-label="Tanggal Kembali: activate to sort column ascending">
                                                         Tanggal Kembali</th>
-                                                    <th tabindex="0" aria-controls="dataTable" style="width: 5%;"
+                                                    <th tabindex="0" aria-controls="dataTable" style="width: 15px;"
                                                         data-sortable="false">Aksi
                                                     </th>
                                                 </tr>
@@ -78,35 +76,40 @@
                                                 <?php $i = 1; ?>
                                                 <?php foreach ($pengajuan as $key => $data): ?>
                                                     <tr>
-                                                        <td>
+                                                        <td style="width: 15px;">
                                                             <?php echo $i; ?>
                                                         </td>
-                                                        <td style="width: 80px;">
-                                                           <p style="font-size:13px;"><?php echo isset($data['nomor_surat']) ? $data['nomor_surat'] : ''; ?></p>
+                                                        <td style="width: 75px;">
+                                                           <p style="font-size:12px;"><?php echo isset($data['nomor_surat']) ? $data['nomor_surat'] : ''; ?></p>
                                                         </td>
-                                                        <td>
+                                                        <td style="width: 100px;">
                                                             <?php echo isset($data['judul_pengajuan']) ? $data['judul_pengajuan'] : ''; ?>
                                                         </td>
-                                                        <td>
+                                                        <td style="width: 90px;">
                                                             <?php echo isset($data['jenis_pengajuan']) ? $data['jenis_pengajuan'] : ''; ?>
                                                         </td>
-                                                        <td>
+                                                        <td style="width: 50px;">
                                                             <?php echo isset($data['date_create']) ? $data['date_create'] : ''; ?>
                                                         </td>
-                                                        <td>
+                                                        <td style="width: 70px;">
                                                             <?php echo isset($data['kota_tujuan']) ? $data['kota_tujuan'] : ''; ?>
                                                         </td>
-                                                        <td>
+                                                        <td style="width: 50px;">
                                                             <?php echo isset($data['tanggal_mulai']) ? $data['tanggal_mulai'] : ''; ?>
                                                         </td>
-                                                        <td>
+                                                        <td style="width: 50px;">
                                                             <?php echo isset($data['tanggal_kembali']) ? $data['tanggal_kembali'] : ''; ?>
                                                         </td>
-                                                        <td>
+                                                        <td style="width: 15px;">
                                                             <ul class="d-flex justify-content-center">
                                                                 <li class="mr-3"><a
-                                                                        href="<?= base_url('index.php/Pengaju/detail_surat/') . $data['id_pengajuan']; ?>"
+                                                                        href="<?= base_url('index.php/SuperAdmin/detail_surat/') . $data['id_pengajuan']; ?>"
                                                                         title="detail surat"><i class="ti-info-alt"></i></a>
+                                                                </li>
+                                                                <li class="mr-3"><a
+                                                                        href="<?= base_url('index.php/SuperAdmin/edit_surat/') . $data['id_pengajuan']; ?>"
+                                                                        class="text-secondary" title="edit"><i
+                                                                            class="fa fa-edit"></i></a>
                                                                 </li>
                                                                 <li><a class="text-danger" title="hapus" data-toggle="modal"
                                                                         data-target="#hapusModal"
@@ -160,6 +163,6 @@
     function hapus() {
         var idPengajuan = document.getElementById('hapusIdSurat').value;
         // Arahkan ke fungsi hapus di controller dengan menggunakan id_pengajuan yang diperoleh
-        window.location.href = '<?= base_url('index.php/Pengaju/hapus_surat/') ?>' + idPengajuan;
+        window.location.href = '<?= base_url('index.php/SuperAdmin/hapus_surat/') ?>' + idPengajuan;
     }
 </script>
