@@ -35,77 +35,77 @@ class Login extends CI_Controller
     ///////                        AUTENTIKASI KETIKA USER MENGINPUTKAN USERNAME DAN PASSWORD                           ///////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function autentikasi()
-{
-    $email = $this->input->post('email');
-    $password = $this->input->post('pass');
+    {
+        $email = $this->input->post('email');
+        $password = $this->input->post('pass');
 
-    if (empty($email) || empty($password)) {
-        $this->session->set_flashdata('msg', '
+        if (empty($email) || empty($password)) {
+            $this->session->set_flashdata('msg', '
         <h3 class="mt-4 mb-2" style="text-align:center !important;">Uupps!</h3>
         <p>Silahkan lengkapi email dan password.</p>
     ');
-        redirect('login');
-    }
+            redirect('login');
+        }
 
-    $user_data = $this->Mlogin->query_validasi_password($email, $password);
+        $user_data = $this->Mlogin->query_validasi_password($email, $password);
 
-    if ($user_data !== false) {
-        if ($user_data['status'] == '1') {
-            $this->session->set_userdata('logged', TRUE);
-            $this->session->set_userdata('user', $email);
-            $karyawan_id = $user_data['karyawan_id'];
-            $this->session->set_userdata('karyawan_id', $karyawan_id);
+        if ($user_data !== false) {
+            if ($user_data['status'] == '1') {
+                $this->session->set_userdata('logged', TRUE);
+                $this->session->set_userdata('user', $email);
+                $karyawan_id = $user_data['karyawan_id'];
+                $this->session->set_userdata('karyawan_id', $karyawan_id);
 
-            $this->load->model('Karyawan_Model');
-            $karyawan_data = $this->Karyawan_Model->getKaryawanById($karyawan_id);
+                $this->load->model('Karyawan_Model');
+                $karyawan_data = $this->Karyawan_Model->getKaryawanById($karyawan_id);
 
-            if ($karyawan_data) {
-                echo "Nama Karyawan: " . $karyawan_data['nama'];
-                echo "Nomor Pekerja: " . $karyawan_data['no_pekerja'];
+                if ($karyawan_data) {
+                    echo "Nama Karyawan: " . $karyawan_data['nama'];
+                    echo "Nomor Pekerja: " . $karyawan_data['no_pekerja'];
+                } else {
+                    echo "Data karyawan tidak ditemukan.";
+                }
+
+                $name = $user_data['name'];
+                switch ($user_data['akses']) {
+                    case '1':
+                        $access_role = 'SuperAdmin';
+                        break;
+                    case '3':
+                        $access_role = 'HCM';
+                        break;
+                    default:
+                        $access_role = 'Pengaju';
+                }
+
+                $this->session->set_userdata('access', $access_role);
+                $this->session->set_userdata('id', $user_data['id']);
+                $this->session->set_userdata('name', $name);
+                $this->session->set_userdata('userdata', $user_data);
+
+                if ($karyawan_data) {
+                    $this->session->set_userdata('karyawan_data', $karyawan_data);
+                }
+
+                $this->load->model('Mlogin');
+                $this->Mlogin->update_last_login($user_data['id']);
+
+                redirect('Home');
             } else {
-                echo "Data karyawan tidak ditemukan.";
-            }
-
-            $name = $user_data['name'];
-            switch ($user_data['akses']) {
-                case '1':
-                    $access_role = 'SuperAdmin';
-                    break;
-                case '3':
-                    $access_role = 'HCM';
-                    break;
-                default:
-                    $access_role = 'Pengaju';
-            }
-
-            $this->session->set_userdata('access', $access_role);
-            $this->session->set_userdata('id', $user_data['id']);
-            $this->session->set_userdata('name', $name);
-            $this->session->set_userdata('userdata', $user_data);
-
-            if ($karyawan_data) {
-                $this->session->set_userdata('karyawan_data', $karyawan_data);
-            }
-            
-            $this->load->model('Mlogin'); 
-            $this->Mlogin->update_last_login($user_data['id']);
-
-            redirect('Home');
-        } else {
-            $this->session->set_flashdata('msg', '
+                $this->session->set_flashdata('msg', '
             <h3 class="mt-4 mb-2" style="text-align:center !important;">Uupps!</h3>
             <p>Akun kamu telah diblokir. Silahkan hubungi admin.</p>
         ');
-            redirect('login');
-        }
-    } else {
-        $this->session->set_flashdata('msg', '
+                redirect('login');
+            }
+        } else {
+            $this->session->set_flashdata('msg', '
         <h3 class="mt-4 mb-2" style="text-align:center !important;">Uupps!</h3>
         <p>Email atau password yang kamu masukan salah.</p>
     ');
-        redirect('login');
+            redirect('login');
+        }
     }
-}
 
     private function updateSessionData($user_data)
     {
