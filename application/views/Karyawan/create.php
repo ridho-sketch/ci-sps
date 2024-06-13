@@ -118,7 +118,7 @@
             <div class="d-flex align-items-center mb-3">
                 <a href="<?php echo site_url('Karyawan'); ?>" class="d-flex align-items-center text-danger">
                     <i class="ti-arrow-circle-left mr-2" style="font-size: 24px;"></i>
-                    <h4 style="color:#de4444; margin-left: 10px;">Tambah Karyawan</h4>
+                    <h4 style="color:#de4444; margin-left: 10px;">Tambah Karyawan aja</h4>
                 </a>
             </div>
             <div class="card">
