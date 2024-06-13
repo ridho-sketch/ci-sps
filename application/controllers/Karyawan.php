@@ -163,10 +163,11 @@ class Karyawan extends CI_Controller
     }
     private function formatDate($dateString)
     {
+        // Pastikan format tanggal adalah yyyy-mm-dd
         $parts = explode('-', $dateString);
-        $day = $parts[0];
+        $year = $parts[0];
         $month = $parts[1];
-        $year = $parts[2];
+        $day = $parts[2];
 
         // Array nama bulan dalam Bahasa Indonesia
         $monthNames = [
@@ -187,6 +188,7 @@ class Karyawan extends CI_Controller
         // Format ulang tanggal
         return $day . ' ' . $monthNames[(int) $month - 1] . ' ' . $year;
     }
+
     public function get_data_karyawan()
     {
         if ($this->input->is_ajax_request() == true) {
@@ -205,21 +207,21 @@ class Karyawan extends CI_Controller
                 $row[] = $field->departemen;
                 $row[] = $field->jabatan;
                 $tanggal_lahir = $field->tanggal_lahir;
-                $row[] = $this->formatDate($tanggal_lahir);
+                $row[] = $this->formatDate($tanggal_lahir);  // Panggilan fungsi formatDate di sini
                 $row[] = '<ul class="d-flex justify-content-center">
-                <li class="mr-3">
-                    <a href="' . base_url('index.php/Karyawan/update/') . $field->id_karyawan .
+            <li class="mr-3">
+                <a href="' . base_url('index.php/Karyawan/update/') . $field->id_karyawan .
                     '" class="text-secondary" title="Edit">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                </li>
-                <li>
-                    <a class="text-danger" title="Hapus" data-toggle="modal" data-target="#hapusModal" onclick="setHapusIdKaryawan(' . $field->id_karyawan .
+                    <i class="fa fa-edit"></i>
+                </a>
+            </li>
+            <li>
+                <a class="text-danger" title="Hapus" data-toggle="modal" data-target="#hapusModal" onclick="setHapusIdKaryawan(' . $field->id_karyawan .
                     ')">
-                        <i class="ti-trash"></i>
-                    </a>
-                </li>
-            </ul>';
+                    <i class="ti-trash"></i>
+                </a>
+            </li>
+        </ul>';
                 $data[] = $row;
             }
 
@@ -235,6 +237,7 @@ class Karyawan extends CI_Controller
             exit('Maaf data tidak bisa ditampilkan');
         }
     }
+
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////                                              Edit                                                           ///////

@@ -168,7 +168,7 @@ class User extends CI_Controller
 
                 $row[] = $no;
                 $row[] = $field->email;
-                $row[] = $field->last_login;
+                $row[] = ($field->last_login == '0000-00-00 00:00:00') ? 'Belum Pernah Login' : $field->last_login;
                 $create_date = date('Y-m-d', strtotime($field->create_date));
                 $row[] = $this->formatDate($create_date);
                 $row[] = '<ul class="d-flex justify-content-center">
