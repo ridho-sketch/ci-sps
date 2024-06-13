@@ -25,7 +25,7 @@ class Login extends CI_Controller
             $this->load->view('Login/index');
             $this->load->view('Login/footer');
         } else {
-            $url = base_url('home');
+            $url = base_url('Home');
             redirect($url);
         }
     }
@@ -90,7 +90,7 @@ class Login extends CI_Controller
             $this->load->model('Mlogin'); 
             $this->Mlogin->update_last_login($user_data['id']);
 
-            redirect('home');
+            redirect('Home');
         } else {
             $this->session->set_flashdata('msg', '
             <h3 class="mt-4 mb-2" style="text-align:center !important;">Uupps!</h3>
