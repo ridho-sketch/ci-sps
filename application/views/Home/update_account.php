@@ -18,7 +18,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <form method="post" action="<?php echo site_url('Home/edit'); ?>">
+                    <form method="post" action="<?php echo site_url('Home/update_account'); ?>">
                         <?= $this->session->flashdata('message'); ?>
                         <div class="form-group">
                             <label for="email" class="col-form-label">Email<span class="text-danger">*</span></label>

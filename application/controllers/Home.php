@@ -6,6 +6,8 @@ class Home extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('Pengajuan_Model');
+        $this->load->model('Karyawan_Model');
         if ($this->session->userdata('logged') != TRUE) {
             $url = base_url('login');
             redirect($url);
@@ -18,24 +20,11 @@ class Home extends CI_Controller
         if ($this->session->userdata('logged') == TRUE) {
             $userdata = $this->session->userdata('userdata');
 
-            // Check access level
-            if ($userdata['akses'] == '1') {
-                $view = 'SuperAdmin/home';
-            } elseif ($userdata['akses'] == '3') {
-                $view = 'hcm/home';
-            } else {
-                $view = 'Pengaju/home';
-            }
-
             $total_pd_dn = 0;
             $total_pd_dl = 0;
 
-
             $karyawan_data = $this->session->userdata('karyawan_data');
 
-            // Load model Pengajuan_Model
-            $this->load->model('Pengajuan_Model');
-            $this->load->model('Karyawan_Model');
             if ($userdata['akses'] == '2') {
                 // Mengambil jumlah pengajuan PD-DN
                 $total_pd_dn = $this->Pengajuan_Model->PengajuanTipeId('Dinas Dalam Negri', $karyawan_data['id_karyawan']);
@@ -48,7 +37,6 @@ class Home extends CI_Controller
 
                 // Mengambil jumlah pengajuan PD-DL
                 $total_pd_dl = $this->Pengajuan_Model->countPengajuanByType('Dinas Luar Negri');
-
             }
 
             $data['judul'] = 'Dashboard';
@@ -57,21 +45,22 @@ class Home extends CI_Controller
             $data['total_pd_dn'] = $total_pd_dn;
             $data['total_pd_dl'] = $total_pd_dl;
 
-            //data untuk grafik
+            // Data untuk grafik
             $chart_data = $this->Pengajuan_Model->get_surat_data();
 
             // Data yang akan dikirim ke view
             $data['chart_data'] = $chart_data;
 
             $this->load->view('layout/header', $data);
-            $this->load->view($view, $data);
+            $this->load->view('Home/index', $data);
             $this->load->view('layout/footer');
         } else {
             $url = base_url('login');
             redirect($url);
         }
     }
-    public function edit()
+
+    public function update_account()
     {
         if ($this->session->userdata('logged') == TRUE) {
 
@@ -124,7 +113,7 @@ class Home extends CI_Controller
 
                         // Tambahkan script JavaScript untuk menunda logout
                         $this->session->set_flashdata('logout', true);
-                        redirect('Home/edit');
+                        redirect('Home/update_account');
                     } else {
                         $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                 Data Akun Gagal di Ubah!
@@ -132,7 +121,7 @@ class Home extends CI_Controller
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>');
-                        redirect('Home/edit');
+                        redirect('Home/update_account');
                     }
                 } else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -142,7 +131,7 @@ class Home extends CI_Controller
                 </button>
             </div>');
 
-                    redirect('Home/edit');
+                    redirect('Home/update_account');
                 }
             }
 
@@ -153,7 +142,7 @@ class Home extends CI_Controller
             $data['employees'] = $this->Karyawan_Model->getNamaKaryawan();
 
             $this->load->view('layout/header', $data);
-            $this->load->view('vw_edit_profile', $data);
+            $this->load->view('Home/update_account', $data);
             $this->load->view('layout/footer');
 
         } else {

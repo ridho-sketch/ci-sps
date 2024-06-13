@@ -84,7 +84,7 @@
                                     <i class="fa fa-angle-down"></i>
                                 </h4>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="<?php echo site_url('Home/edit'); ?>">Edit Akun</a>
+                                    <a class="dropdown-item" href="<?php echo site_url('Home/update_account'); ?>">Edit Akun</a>
                                     <a class="dropdown-item" href="<?php echo site_url('Login/logout'); ?>">Keluar</a>
                                 </div>
                             </div>
