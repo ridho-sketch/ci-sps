@@ -1,43 +1,9 @@
 <!-- footer area start-->
-<footer>
+<footer style="height:20px;">
     <div class="footer-area">
-        <p>© 2024 <a href="https://www.bsp.co.id/">Bumi Siak Pusako</a></p>
+        <p>© 2024 Bumi Siak Pusako</p>
     </div>
 </footer>
-    
-<script>
-    $(document).ready(function () {
-        $('#dataTable').DataTable();
-    });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const togglePassword = document.querySelector('#togglePassword');
-        const passwordInput = document.querySelector('#password');
-
-        togglePassword.addEventListener('click', function () {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            // Ganti ikon mata kunci sesuai dengan tipe input password
-            this.classList.toggle('fa-eye-slash');
-            this.classList.toggle('fa-eye');
-        });
-    });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const togglePassword = document.querySelector('#togglePassword2');
-        const passwordInput = document.querySelector('#retype_password');
-
-        togglePassword.addEventListener('click', function () {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            // Ganti ikon mata kunci sesuai dengan tipe input password
-            this.classList.toggle('fa-eye-slash');
-            this.classList.toggle('fa-eye');
-        });
-    });
-</script>
 
 <!-- jquery latest version -->
 <script src="<?= base_url('assets/') ?>js/vendor/jquery-2.2.4.min.js"></script>
@@ -51,7 +17,6 @@
 <script src="<?= base_url('assets/') ?>js/jquery.slicknav.min.js"></script>
 
 <!-- Start datatable js -->
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
@@ -81,9 +46,10 @@
 <!-- others plugins -->
 <script src="<?= base_url('assets/') ?>js/plugins.js"></script>
 <script src="<?= base_url('assets/') ?>js/scripts.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script src="<?= base_url('assets/') ?>datepicker/js/bootstrap-datepicker.js"></script>
+
 
 </body>
 
